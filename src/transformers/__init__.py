@@ -128,6 +128,7 @@ _import_structure = {
     ],
     "models": [],
     # Models
+    "models.nvgpt": ["NVGPT_PRETRAINED_CONFIG_ARCHIVE_MAP", "NVGPTConfig", "NVGPTTokenizer"],
     "models.albert": ["ALBERT_PRETRAINED_CONFIG_ARCHIVE_MAP", "AlbertConfig"],
     "models.align": [
         "ALIGN_PRETRAINED_CONFIG_ARCHIVE_MAP",
@@ -817,6 +818,7 @@ except OptionalDependencyNotAvailable:
     ]
 else:
     # Fast tokenizers structure
+    _import_structure["models.nvgpt"].append("NVGPTTokenizerFast")
     _import_structure["models.albert"].append("AlbertTokenizerFast")
     _import_structure["models.bart"].append("BartTokenizerFast")
     _import_structure["models.barthez"].append("BarthezTokenizerFast")
@@ -1072,6 +1074,22 @@ else:
     _import_structure["modeling_utils"] = ["PreTrainedModel"]
 
     # PyTorch models structure
+
+    _import_structure["models.nvgpt"].extend(
+        [
+            "NVGPT_PRETRAINED_MODEL_ARCHIVE_LIST",
+            "NVGPTForMaskedLM",
+            "NVGPTForCausalLM",
+            "NVGPTForMultipleChoice",
+            "NVGPTForQuestionAnswering",
+            "NVGPTForSequenceClassification",
+            "NVGPTForTokenClassification",
+            "NVGPTLayer",
+            "NVGPTModel",
+            "NVGPTPreTrainedModel",
+            "load_tf_weights_in_nvgpt",
+        ]
+    )
     _import_structure["models.albert"].extend(
         [
             "ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST",
@@ -4268,6 +4286,7 @@ if TYPE_CHECKING:
         load_tf2_weights_in_pytorch_model,
     )
     from .models.albert import ALBERT_PRETRAINED_CONFIG_ARCHIVE_MAP, AlbertConfig
+    from .models.nvgpt import NVGPT_PRETRAINED_CONFIG_ARCHIVE_MAP, NVGPTConfig, NVGPTTokenizer
     from .models.align import (
         ALIGN_PRETRAINED_CONFIG_ARCHIVE_MAP,
         AlignConfig,
@@ -4911,6 +4930,7 @@ if TYPE_CHECKING:
         from .utils.dummy_tokenizers_objects import *
     else:
         # Fast tokenizers imports
+        from .models.nvgpt import NVGPTTokenizerFast
         from .models.albert import AlbertTokenizerFast
         from .models.bart import BartTokenizerFast
         from .models.barthez import BarthezTokenizerFast
@@ -5128,6 +5148,20 @@ if TYPE_CHECKING:
         from .modeling_utils import PreTrainedModel
 
         # PyTorch model imports
+
+        from .models.nvgpt import (
+            NVGPT_PRETRAINED_MODEL_ARCHIVE_LIST,
+            NVGPTForMaskedLM,
+            NVGPTForCausalLM,
+            NVGPTForMultipleChoice,
+            NVGPTForQuestionAnswering,
+            NVGPTForSequenceClassification,
+            NVGPTForTokenClassification,
+            NVGPTLayer,
+            NVGPTModel,
+            NVGPTPreTrainedModel,
+            load_tf_weights_in_nvgpt,
+        )
         from .models.albert import (
             ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST,
             AlbertForMaskedLM,
